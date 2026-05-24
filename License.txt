@@ -1,0 +1,39 @@
+LICENCJA FREEWARE – Coating Analyzer Binek 2.4 Beta
+
+Copyright (c) 2025–2026 Marek Goral
+
+1. Definicje
+   „Program” – oprogramowanie „Coating Analyzer Binek 2.4 Beta” w postaci pliku wykonywalnego (.exe) oraz wszelkie towarzyszące mu pliki (w tym dokumentacja).
+   „Autor” – Marek Goral.
+   „Użytkownik” – każda osoba fizyczna lub prawna, która pobrała, zainstalowała lub używa Programu.
+
+2. Zakres licencji
+   Program jest udostępniany jako **freeware**. Oznacza to, że Użytkownik może:
+   - używać Programu bezpłatnie, bez ograniczeń czasowych i funkcjonalnych,
+   - kopiować i rozpowszechniać Program w niezmienionej postaci (oryginalny plik .exe oraz towarzyszące mu pliki),
+   - instalować Program na dowolnej liczbie komputerów.
+
+3. Ograniczenia
+   Użytkownik NIE MA PRAWA:
+   - dekompilować, reverse engineerować ani modyfikować kodu Programu,
+   - usuwać lub zmieniać informacji o prawach autorskich,
+   - wykorzystywać Programu w sposób sprzeczny z prawem lub w celach komercyjnych bez odrębnej zgody Autora (kopiowanie i rozpowszechnianie freeware nie jest uznawane za użytek komercyjny).
+
+4. Wyłączenie odpowiedzialności (AS-IS)
+   PROGRAM JEST DOSTARCZANY „TAK JAK STOI” („AS IS”), BEZ JAKICHKOLWIEK GWARANCJI, WYRAŹNYCH ANI DOMNIEMANYCH. AUTOR NIE UDZIELA GWARANCJI DOTYCZĄCYCH PRZYDATNOŚCI, NIEZAWODNOŚCI, BEZBŁĘDNOŚCI ANI PRZYDATNOŚCI DO OKREŚLONEGO CELU.
+
+   AUTOR NIE PONOSI ODPOWIEDZIALNOŚCI ZA JAKIEKOLWIEK SZKODY BEZPOŚREDNIE, POŚREDNIE, PRZYPADKOWE, NASTĘPCZE LUB KARNE, WYNIKAJĄCE Z UŻYCIA LUB NIEMOŻLIWOŚCI UŻYCIA PROGRAMU, W TYM UTRATY DANYCH, BŁĘDÓW W OBLICZENIACH, NIEDOKŁADNYCH WYNIKÓW ANALIZY CZY JAKICHKOLWIEK INNYCH STRAT, NAWET JEŚLI AUTOR ZOSTAŁ POINFORMOWANY O MOŻLIWOŚCI WYSTĄPIENIA TAKICH SZKÓD.
+
+   KORZYSTANIE Z PROGRAMU ODBYWA SIĘ NA WYŁĄCZNE RYZYKO UŻYTKOWNIKA.
+
+5. Zgodność z prawem
+   Użytkownik zobowiązuje się do korzystania z Programu zgodnie z obowiązującymi przepisami prawa. Autor nie ponosi odpowiedzialności za skutki nieprawidłowego wykorzystania Programu.
+
+6. Postanowienia końcowe
+   Niniejsza licencja obowiązuje od chwili pobrania lub pierwszego uruchomienia Programu. Autor zastrzega sobie prawo do zmiany warunków licencji w przyszłych wersjach, jednakże poprzednie wersje pozostają objęte tą licencją.
+
+   W przypadku jakichkolwiek pytań prosimy o kontakt: mgoral@hub.pl
+
+---
+
+© 2025–2026 Marek Goral. Wszystkie prawa zastrzeżone.
