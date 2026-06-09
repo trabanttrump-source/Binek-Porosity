@@ -1,0 +1,47 @@
+FREEWARE LICENSE – Coating Analyzer Binek 2.4 Beta
+
+Copyright (c) 2025–2026 Marek Goral
+
+1. Definitions
+
+"Program" – the software "Coating Analyzer Binek 2.4 Beta" in executable form (.exe) and all accompanying files (including documentation).
+
+"Author" – Marek Goral.
+
+"User" – any natural or legal person who downloads, installs, or uses the Program.
+
+2. License Scope
+The Program is provided as freeware. This means the User may:
+
+use the Program free of charge, without time or functional limitations,
+
+copy and distribute the Program in its unmodified form (original .exe file and accompanying files),
+
+install the Program on any number of computers.
+
+3. Restrictions
+The User is NOT PERMITTED to:
+
+decompile, reverse‑engineer, or modify the Program’s code,
+
+remove or alter any copyright information,
+
+use the Program in a manner that violates the law or for commercial purposes without the Author’s separate consent (copying and distributing the freeware itself is not considered commercial use).
+
+4. Disclaimer of Warranties (AS‑IS)
+THE PROGRAM IS PROVIDED "AS IS", WITHOUT ANY WARRANTIES, EXPRESS OR IMPLIED. THE AUTHOR MAKES NO WARRANTIES REGARDING THE PROGRAM’S FITNESS, RELIABILITY, ERROR‑FREE OPERATION, OR SUITABILITY FOR ANY PARTICULAR PURPOSE.
+
+THE AUTHOR SHALL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING FROM THE USE OR INABILITY TO USE THE PROGRAM, INCLUDING DATA LOSS, CALCULATION ERRORS, INACCURATE ANALYSIS RESULTS, OR ANY OTHER LOSSES, EVEN IF THE AUTHOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+USE OF THE PROGRAM IS AT THE USER’S SOLE RISK.
+
+5. Compliance with Law
+The User agrees to use the Program in compliance with applicable laws. The Author is not responsible for the consequences of improper use of the Program.
+
+6. Final Provisions
+This license takes effect upon downloading or first launching the Program. The Author reserves the right to change the license terms for future versions, but previous versions remain governed by this license.
+
+For any questions, please contact: mgoral@hub.pl
+
+© 2025–2026 Marek Goral. All rights reserved.
+
