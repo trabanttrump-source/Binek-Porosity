@@ -1,635 +1,166 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Binek Porosity – Advanced Image Analysis</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
-
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-    <style>
-        /* ───────────── RESET & BASE ───────────── */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f8fafc;
-            color: #1e293b;
-            line-height: 1.6;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* ───────────── HEADER / NAV ───────────── */
-        header {
-            background: #0f172a;
-            color: #f8fafc;
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo i {
-            font-size: 28px;
-            color: #38bdf8;
-        }
-
-        .logo h1 {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-
-        .logo span {
-            color: #94a3b8;
-            font-weight: 400;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            font-size: 14px;
-            font-weight: 500;
-            color: #cbd5e1;
-            transition: color 0.2s;
-        }
-
-        nav a:hover {
-            color: #38bdf8;
-        }
-
-        .btn-ghost {
-            padding: 8px 18px;
-            border: 1.5px solid #38bdf8;
-            border-radius: 8px;
-            color: #38bdf8;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-
-        .btn-ghost:hover {
-            background: #38bdf8;
-            color: #0f172a;
-        }
-
-        /* ───────────── HERO ───────────── */
-        .hero {
-            padding: 60px 0 40px;
-            text-align: center;
-        }
-
-        .hero h2 {
-            font-size: 42px;
-            font-weight: 700;
-            letter-spacing: -1px;
-            margin-bottom: 16px;
-        }
-
-        .hero h2 i {
-            color: #38bdf8;
-        }
-
-        .hero p {
-            font-size: 18px;
-            color: #475569;
-            max-width: 720px;
-            margin: 0 auto 28px;
-        }
-
-        .hero-badges {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 32px;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #e2e8f0;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
-            color: #1e293b;
-        }
-
-        .badge i {
-            color: #0f172a;
-        }
-
-        .badge.green {
-            background: #dcfce7;
-            color: #166534;
-        }
-        .badge.green i {
-            color: #16a34a;
-        }
-        .badge.blue {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-        .badge.blue i {
-            color: #2563eb;
-        }
-        .badge.purple {
-            background: #ede9fe;
-            color: #5b21b6;
-        }
-        .badge.purple i {
-            color: #7c3aed;
-        }
-
-        .cta-group {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 14px;
-        }
-
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 36px;
-            background: #0f172a;
-            color: #f8fafc;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 16px;
-            transition: all 0.25s;
-            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.25);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.35);
-            background: #1e293b;
-        }
-
-        .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 36px;
-            background: transparent;
-            color: #0f172a;
-            border: 2px solid #0f172a;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 16px;
-            transition: all 0.25s;
-        }
-
-        .btn-secondary:hover {
-            background: #0f172a;
-            color: #f8fafc;
-            transform: translateY(-2px);
-        }
-
-        /* ───────────── FEATURES ───────────── */
-        .features {
-            padding: 40px 0 60px;
-        }
-
-        .features h3 {
-            text-align: center;
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 36px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 24px;
-        }
-
-        .feature-card {
-            background: #ffffff;
-            padding: 24px 20px;
-            border-radius: 14px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-            border: 1px solid #e9edf2;
-            transition: all 0.2s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
-        }
-
-        .feature-card i {
-            font-size: 28px;
-            color: #0f172a;
-            margin-bottom: 12px;
-            display: inline-block;
-        }
-
-        .feature-card h4 {
-            font-size: 17px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .feature-card p {
-            font-size: 14px;
-            color: #64748b;
-        }
-
-        /* ───────────── RELEASES ───────────── */
-        .releases {
-            padding: 40px 0 60px;
-            background: #ffffff;
-            border-top: 1px solid #e9edf2;
-        }
-
-        .releases h3 {
-            text-align: center;
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .releases .sub {
-            text-align: center;
-            color: #64748b;
-            margin-bottom: 32px;
-            font-size: 15px;
-        }
-
-        .release-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            max-width: 820px;
-            margin: 0 auto;
-        }
-
-        .release-item {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            padding: 18px 24px;
-            background: #f8fafc;
-            border-radius: 12px;
-            border-left: 5px solid #0f172a;
-            transition: all 0.2s;
-        }
-
-        .release-item:hover {
-            background: #f1f5f9;
-        }
-
-        .release-item .info {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .release-item .name {
-            font-weight: 600;
-            font-size: 16px;
-        }
-
-        .release-item .meta {
-            font-size: 13px;
-            color: #64748b;
-        }
-
-        .release-item .meta i {
-            margin-right: 4px;
-        }
-
-        .release-item .tag {
-            font-size: 12px;
-            font-weight: 600;
-            padding: 2px 12px;
-            border-radius: 12px;
-            background: #e2e8f0;
-            color: #1e293b;
-        }
-
-        .release-item .tag.pre {
-            background: #fef9c3;
-            color: #854d0e;
-        }
-
-        .release-item .tag.latest {
-            background: #0f172a;
-            color: #f8fafc;
-        }
-
-        .release-item .actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .release-item .actions a {
-            font-size: 13px;
-            font-weight: 500;
-            padding: 6px 14px;
-            border-radius: 8px;
-            background: #0f172a;
-            color: #f8fafc;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .release-item .actions a:hover {
-            background: #1e293b;
-        }
-
-        .release-item .actions a.gh {
-            background: transparent;
-            color: #0f172a;
-            border: 1.5px solid #0f172a;
-        }
-
-        .release-item .actions a.gh:hover {
-            background: #0f172a;
-            color: #f8fafc;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 30px 0;
-            color: #94a3b8;
-        }
-
-        .loading i {
-            margin-right: 8px;
-        }
-
-        .error-msg {
-            text-align: center;
-            padding: 20px;
-            color: #dc2626;
-            background: #fef2f2;
-            border-radius: 10px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* ───────────── FOOTER ───────────── */
-        footer {
-            background: #0f172a;
-            color: #94a3b8;
-            padding: 40px 0 28px;
-            border-top: 1px solid #1e293b;
-        }
-
-        footer .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-            text-align: center;
-        }
-
-        footer .socials {
-            display: flex;
-            gap: 18px;
-        }
-
-        footer .socials a {
-            color: #94a3b8;
-            font-size: 20px;
-            transition: color 0.2s;
-        }
-
-        footer .socials a:hover {
-            color: #38bdf8;
-        }
-
-        footer p {
-            font-size: 14px;
-        }
-
-        footer a {
-            color: #38bdf8;
-        }
-
-        /* ───────────── RESPONSIVE ───────────── */
-        @media (max-width: 768px) {
-            .hero h2 {
-                font-size: 30px;
-            }
-            .hero p {
-                font-size: 16px;
-            }
-            .release-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-            }
-            .release-item .actions {
-                width: 100%;
-            }
-            .release-item .actions a {
-                flex: 1;
-                justify-content: center;
-            }
-            header .container {
-                flex-direction: column;
-                align-items: stretch;
-                text-align: center;
-            }
-            nav {
-                justify-content: center;
-            }
-            .btn-primary,
-            .btn-secondary {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- ═══════════ HEADER ═══════════ -->
-    <header>
-        <div class="container">
-            <div class="logo">
-                <i class="fas fa-microscope"></i>
-                <h1>Binek <span>Porosity</span></h1>
+// ─────────────────────────────────────────────────────────────
+//  Binek Porosity – GitHub Releases Fetcher
+//  Automatically lists releases & pre‑releases from:
+//  https://github.com/trabanttrump-source/Binek-Porosity
+// ─────────────────────────────────────────────────────────────
+
+const REPO_OWNER = 'trabanttrump-source';
+const REPO_NAME  = 'Binek-Porosity';
+const API_URL    = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/releases`;
+
+const container = document.getElementById('releaseContainer');
+
+// ─── Helper: format date ───
+function formatDate(iso) {
+    const d = new Date(iso);
+    return d.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+}
+
+// ─── Helper: build download link ───
+function downloadLink(asset) {
+    // Prefer .exe if present, otherwise first asset
+    const exe = asset.find(a => a.name.toLowerCase().endsWith('.exe'));
+    const target = exe || asset[0];
+    if (!target) return '#';
+    return target.browser_download_url;
+}
+
+// ─── Render a single release ───
+function renderRelease(release) {
+    const isPre = release.prerelease === true;
+    const isLatest = !isPre;  // we'll mark the first non‑pre as "Latest"
+
+    const tagClass = isPre ? 'pre' : 'latest';
+    const tagLabel = isPre ? 'Pre‑release' : 'Latest';
+
+    // Get asset list (filter out source code zips if you like)
+    const assets = release.assets || [];
+
+    // Build download link (prefer .exe)
+    const dlUrl = downloadLink(assets);
+
+    // Manual PDF link (if present)
+    const manualAsset = assets.find(a => a.name.toLowerCase().includes('manual'));
+    const manualUrl = manualAsset ? manualAsset.browser_download_url : null;
+
+    const div = document.createElement('div');
+    div.className = 'release-item';
+
+    // Left side: name + meta
+    const info = document.createElement('div');
+    info.className = 'info';
+
+    const nameSpan = document.createElement('span');
+    nameSpan.className = 'name';
+    nameSpan.textContent = release.name || release.tag_name;
+    info.appendChild(nameSpan);
+
+    const metaSpan = document.createElement('span');
+    metaSpan.className = 'meta';
+    metaSpan.innerHTML = `
+        <i class="far fa-calendar-alt"></i> ${formatDate(release.published_at || release.created_at)}
+        &nbsp;&middot;&nbsp;
+        <i class="fas fa-tag"></i> ${release.tag_name}
+        &nbsp;&middot;&nbsp;
+        <i class="fas fa-file-archive"></i> ${assets.length} asset(s)
+    `;
+    info.appendChild(metaSpan);
+
+    // Tag (Latest / Pre‑release)
+    const tag = document.createElement('span');
+    tag.className = `tag ${tagClass}`;
+    tag.textContent = tagLabel;
+
+    // Right side: action buttons
+    const actions = document.createElement('div');
+    actions.className = 'actions';
+
+    // Download button
+    if (dlUrl && dlUrl !== '#') {
+        const dlBtn = document.createElement('a');
+        dlBtn.href = dlUrl;
+        dlBtn.innerHTML = `<i class="fas fa-download"></i> Download`;
+        dlBtn.target = '_blank';
+        actions.appendChild(dlBtn);
+    }
+
+    // Manual PDF (if available)
+    if (manualUrl) {
+        const pdfBtn = document.createElement('a');
+        pdfBtn.href = manualUrl;
+        pdfBtn.innerHTML = `<i class="fas fa-file-pdf"></i> Manual`;
+        pdfBtn.target = '_blank';
+        pdfBtn.className = 'gh';
+        actions.appendChild(pdfBtn);
+    }
+
+    // GitHub release page
+    const ghBtn = document.createElement('a');
+    ghBtn.href = release.html_url;
+    ghBtn.innerHTML = `<i class="fab fa-github"></i> View`;
+    ghBtn.target = '_blank';
+    ghBtn.className = 'gh';
+    actions.appendChild(ghBtn);
+
+    // Assemble
+    const topRow = document.createElement('div');
+    topRow.style.cssText = 'display:flex;align-items:center;gap:12px;flex-wrap:wrap;';
+    topRow.appendChild(info);
+    topRow.appendChild(tag);
+
+    div.appendChild(topRow);
+    div.appendChild(actions);
+
+    return div;
+}
+
+// ─── Main fetch ───
+async function fetchReleases() {
+    try {
+        const response = await fetch(API_URL);
+
+        if (!response.ok) {
+            throw new Error(`GitHub API returned ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (!data || data.length === 0) {
+            container.innerHTML = `<div class="error-msg">No releases found.</div>`;
+            return;
+        }
+
+        // Clear loading state
+        container.innerHTML = '';
+
+        // Sort: newest first (already sorted by GitHub, but double‑check)
+        const sorted = data.sort((a, b) => {
+            const da = new Date(a.created_at);
+            const db = new Date(b.created_at);
+            return db - da;
+        });
+
+        // Render each release
+        sorted.forEach((release, index) => {
+            const el = renderRelease(release);
+            container.appendChild(el);
+        });
+
+    } catch (error) {
+        console.error('Failed to load releases:', error);
+        container.innerHTML = `
+            <div class="error-msg">
+                <i class="fas fa-exclamation-triangle"></i>
+                Could not load releases. Please try again later.
+                <br><small style="color:#94a3b8;">${error.message}</small>
             </div>
-            <nav>
-                <a href="#features">Features</a>
-                <a href="#releases">Downloads</a>
-                <a href="https://github.com/trabanttrump-source/Binek-Porosity" target="_blank" class="btn-ghost">
-                    <i class="fab fa-github"></i> GitHub
-                </a>
-            </nav>
-        </div>
-    </header>
+        `;
+    }
+}
 
-    <!-- ═══════════ HERO ═══════════ -->
-    <section class="hero">
-        <div class="container">
-            <h2>
-                <i class="fas fa-cube"></i> Binek 2.5 &ndash; Legacy Edition
-            </h2>
-            <p>
-                Professional image analysis for materials science, metallography, and
-                quality control. Porosity, hardness, length measurements &amp; ROI management
-                &mdash; all in one portable tool.
-            </p>
-
-            <div class="hero-badges">
-                <span class="badge green"><i class="fas fa-check-circle"></i> Freeware</span>
-                <span class="badge blue"><i class="fas fa-windows"></i> Windows 10/11</span>
-                <span class="badge purple"><i class="fas fa-box"></i> Portable EXE</span>
-                <span class="badge"><i class="fas fa-globe"></i> Offline</span>
-            </div>
-
-            <div class="cta-group">
-                <a href="#releases" class="btn-primary">
-                    <i class="fas fa-download"></i> Download Latest
-                </a>
-                <a href="https://github.com/trabanttrump-source/Binek-Porosity" target="_blank" class="btn-secondary">
-                    <i class="fab fa-github"></i> View on GitHub
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══════════ FEATURES ═══════════ -->
-    <section class="features" id="features">
-        <div class="container">
-            <h3>Why Binek?</h3>
-            <div class="features-grid">
-
-                <div class="feature-card">
-                    <i class="fas fa-chart-pie"></i>
-                    <h4>Porosity Analysis</h4>
-                    <p>Percentage, pore size distribution (5 categories), histograms, and colour‑coded fusion images.</p>
-                </div>
-
-                <div class="feature-card">
-                    <i class="fas fa-ruler-combined"></i>
-                    <h4>Length &amp; Area</h4>
-                    <p>Three independent measurement series with statistics (mean, std dev). ROI‑based area calculation.</p>
-                </div>
-
-                <div class="feature-card">
-                    <i class="fas fa-weight-hanging"></i>
-                    <h4>Hardness Testing</h4>
-                    <p>Vickers (HV) and Knoop (HK) with custom loads. Diagonal measurement and automatic calculation.</p>
-                </div>
-
-                <div class="feature-card">
-                    <i class="fas fa-vector-square"></i>
-                    <h4>Regions of Interest</h4>
-                    <p>Up to 5 ROIs per image. Rectangle, Ellipse, Polygon &amp; Freeform. Independent binarization per ROI.</p>
-                </div>
-
-                <div class="feature-card">
-                    <i class="fas fa-camera"></i>
-                    <h4>Live Camera</h4>
-                    <p>DirectShow camera preview and capture. Brightness, contrast &amp; gamma adjustment in real time.</p>
-                </div>
-
-                <div class="feature-card">
-                    <i class="fas fa-file-alt"></i>
-                    <h4>Reports &amp; Export</h4>
-                    <p>Word (DOCX) and Excel (XLSX) reports with annotated images. Export PNG, JPG, TIFF and project files (.binek).</p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══════════ RELEASES (dynamic) ═══════════ -->
-    <section class="releases" id="releases">
-        <div class="container">
-            <h3><i class="fas fa-tags"></i> Releases &amp; Pre‑releases</h3>
-            <p class="sub">
-                Automatically fetched from
-                <a href="https://github.com/trabanttrump-source/Binek-Porosity/releases" target="_blank" style="color:#0f172a;font-weight:600;">
-                    GitHub <i class="fas fa-external-link-alt" style="font-size:12px;"></i>
-                </a>
-            </p>
-
-            <div id="releaseContainer" class="release-list">
-                <div class="loading"><i class="fas fa-spinner fa-spin"></i> Loading releases…</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══════════ FOOTER ═══════════ -->
-    <footer>
-        <div class="container">
-            <div class="socials">
-                <a href="https://github.com/trabanttrump-source/Binek-Porosity" target="_blank" aria-label="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://github.com/trabanttrump-source/Binek-Porosity/releases" target="_blank" aria-label="Releases">
-                    <i class="fas fa-tag"></i>
-                </a>
-                <a href="mailto:mgoral@hub.pl" aria-label="Email">
-                    <i class="fas fa-envelope"></i>
-                </a>
-            </div>
-            <p>
-                &copy; 2026 <a href="https://github.com/trabanttrump-source" target="_blank">Marek Goral</a> &middot;
-                Freeware &middot; Built with <i class="fas fa-heart" style="color:#ef4444;font-size:12px;"></i>
-            </p>
-            <p style="font-size:13px;color:#64748b;">
-                <i class="fas fa-code"></i> Page automatically lists releases via GitHub API
-            </p>
-        </div>
-    </footer>
-
-    <!-- ═══════════ SCRIPT ═══════════ -->
-    <script src="script.js"></script>
-</body>
-</html>
+// ─── Go ───
+fetchReleases();
