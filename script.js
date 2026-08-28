@@ -21,10 +21,10 @@ function formatDate(iso) {
 }
 
 // ─── Helper: build download link ───
-function downloadLink(asset) {
+function downloadLink(assets) {
     // Prefer .exe if present, otherwise first asset
-    const exe = asset.find(a => a.name.toLowerCase().endsWith('.exe'));
-    const target = exe || asset[0];
+    const exe = assets.find(a => a.name.toLowerCase().endsWith('.exe'));
+    const target = exe || assets[0];
     if (!target) return '#';
     return target.browser_download_url;
 }
@@ -32,18 +32,11 @@ function downloadLink(asset) {
 // ─── Render a single release ───
 function renderRelease(release) {
     const isPre = release.prerelease === true;
-    const isLatest = !isPre;  // we'll mark the first non‑pre as "Latest"
-
     const tagClass = isPre ? 'pre' : 'latest';
     const tagLabel = isPre ? 'Pre‑release' : 'Latest';
 
-    // Get asset list (filter out source code zips if you like)
     const assets = release.assets || [];
-
-    // Build download link (prefer .exe)
     const dlUrl = downloadLink(assets);
-
-    // Manual PDF link (if present)
     const manualAsset = assets.find(a => a.name.toLowerCase().includes('manual'));
     const manualUrl = manualAsset ? manualAsset.browser_download_url : null;
 
@@ -134,18 +127,15 @@ async function fetchReleases() {
             return;
         }
 
-        // Clear loading state
         container.innerHTML = '';
 
-        // Sort: newest first (already sorted by GitHub, but double‑check)
         const sorted = data.sort((a, b) => {
             const da = new Date(a.created_at);
             const db = new Date(b.created_at);
             return db - da;
         });
 
-        // Render each release
-        sorted.forEach((release, index) => {
+        sorted.forEach((release) => {
             const el = renderRelease(release);
             container.appendChild(el);
         });
@@ -162,5 +152,4 @@ async function fetchReleases() {
     }
 }
 
-// ─── Go ───
 fetchReleases();
